@@ -16,6 +16,14 @@ const CandidateDashboard = () => {
     const file = event.target.files?.[0];
     if (file) {
       setSelectedFile(file);
+      console.log("File selected:", file.name, file.size);
+    }
+  };
+
+  const handleChooseFileClick = () => {
+    const fileInput = document.getElementById('resume-upload') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.click();
     }
   };
 
@@ -95,11 +103,14 @@ const CandidateDashboard = () => {
                         className="hidden"
                         id="resume-upload"
                       />
-                      <label htmlFor="resume-upload">
-                        <Button variant="outline" className="cursor-pointer">
-                          Choose File
-                        </Button>
-                      </label>
+                      <Button 
+                        variant="outline" 
+                        className="cursor-pointer"
+                        onClick={handleChooseFileClick}
+                        type="button"
+                      >
+                        Choose File
+                      </Button>
                     </div>
                     
                     {selectedFile && (
