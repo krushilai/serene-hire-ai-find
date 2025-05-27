@@ -7,10 +7,12 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { User, Upload, Eye, Edit } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import ProfilePreview from "@/components/ProfilePreview";
 
 const CandidateDashboard = () => {
   const navigate = useNavigate();
   const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false);
+  const [isPreviewDialogOpen, setIsPreviewDialogOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -167,9 +169,22 @@ const CandidateDashboard = () => {
               <CardDescription className="text-gray-600 mb-4 text-center">
                 See how recruiters will view your profile and make adjustments
               </CardDescription>
-              <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                Preview Profile
-              </Button>
+              <Dialog open={isPreviewDialogOpen} onOpenChange={setIsPreviewDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                    Preview Profile
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+                  <DialogHeader>
+                    <DialogTitle className="text-xl text-gray-800">Profile Preview</DialogTitle>
+                    <DialogDescription className="text-gray-600">
+                      This is how your profile appears to recruiters
+                    </DialogDescription>
+                  </DialogHeader>
+                  <ProfilePreview />
+                </DialogContent>
+              </Dialog>
             </CardContent>
           </Card>
         </div>
