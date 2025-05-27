@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -148,7 +149,10 @@ const CandidateDashboard = () => {
               <CardDescription className="text-gray-600 mb-4 text-center">
                 Create a rich profile that showcases your personality and potential
               </CardDescription>
-              <Button className="w-full bg-green-600 hover:bg-green-700">
+              <Button 
+                className="w-full bg-green-600 hover:bg-green-700"
+                onClick={() => navigate("/profile-builder")}
+              >
                 Build Profile
               </Button>
             </CardContent>
@@ -225,7 +229,10 @@ const CandidateDashboard = () => {
             <p className="text-gray-600 mb-4">
               Take your time to build a profile that truly represents you. Quality over speed always wins.
             </p>
-            <Button className="bg-green-600 hover:bg-green-700">
+            <Button 
+              className="bg-green-600 hover:bg-green-700"
+              onClick={() => navigate("/profile-builder")}
+            >
               Continue Building Profile
             </Button>
           </CardContent>
