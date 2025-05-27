@@ -1,13 +1,32 @@
-
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { User, Upload, Eye, Edit } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const CandidateDashboard = () => {
   const navigate = useNavigate();
+  const [isUploadDialogOpen, setIsUploadDialogOpen] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setSelectedFile(file);
+    }
+  };
+
+  const handleUpload = () => {
+    if (selectedFile) {
+      // Here you would typically upload the file to your backend
+      console.log("Uploading file:", selectedFile.name);
+      setIsUploadDialogOpen(false);
+      setSelectedFile(null);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-green-50">
@@ -52,9 +71,60 @@ const CandidateDashboard = () => {
               <CardDescription className="text-gray-600 mb-4 text-center">
                 Upload your resume and let AI extract your skills and experience
               </CardDescription>
-              <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                Upload Resume
-              </Button>
+              <Dialog open={isUploadDialogOpen} onOpenChange={setIsUploadDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                    Upload Resume
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle className="text-xl text-gray-800">Upload Your Resume</DialogTitle>
+                    <DialogDescription className="text-gray-600">
+                      Choose a PDF or Word document from your device. We'll help extract your skills and experience automatically.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="space-y-4">
+                    <div className="border-2 border-dashed border-purple-200 rounded-lg p-6 text-center hover:border-purple-300 transition-colors">
+                      <Upload className="w-8 h-8 text-purple-400 mx-auto mb-2" />
+                      <p className="text-gray-600 mb-2">Drop your resume here or click to browse</p>
+                      <input
+                        type="file"
+                        accept=".pdf,.doc,.docx"
+                        onChange={handleFileSelect}
+                        className="hidden"
+                        id="resume-upload"
+                      />
+                      <label htmlFor="resume-upload">
+                        <Button variant="outline" className="cursor-pointer">
+                          Choose File
+                        </Button>
+                      </label>
+                    </div>
+                    
+                    {selectedFile && (
+                      <div className="p-3 bg-purple-50 rounded-lg border border-purple-200">
+                        <p className="text-sm text-purple-700">
+                          Selected: {selectedFile.name} ({(selectedFile.size / 1024 / 1024).toFixed(2)} MB)
+                        </p>
+                      </div>
+                    )}
+
+                    <div className="flex gap-2 justify-end">
+                      <Button variant="outline" onClick={() => setIsUploadDialogOpen(false)}>
+                        Cancel
+                      </Button>
+                      <Button 
+                        onClick={handleUpload} 
+                        disabled={!selectedFile}
+                        className="bg-purple-600 hover:bg-purple-700"
+                      >
+                        Upload Resume
+                      </Button>
+                    </div>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </CardContent>
           </Card>
 
