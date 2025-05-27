@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -7,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Search, Star, User, Bookmark, Filter } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import ChatBot from "@/components/ChatBot";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -243,6 +243,9 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+
+      {/* Add ChatBot component */}
+      <ChatBot />
     </div>
   );
 };
