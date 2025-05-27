@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -22,7 +21,7 @@ const Signup = () => {
     if (userType === "recruiter") {
       navigate("/dashboard");
     } else {
-      navigate("/candidate-profile");
+      navigate("/candidate-dashboard");
     }
   };
 
@@ -137,7 +136,7 @@ const Signup = () => {
               />
             </div>
             <Button type="submit" className="w-full bg-purple-600 hover:bg-purple-700">
-              Create Account
+              {userType === "recruiter" ? "Go to Dashboard" : "Go to Profile"}
             </Button>
           </form>
           <div className="mt-6 text-center">

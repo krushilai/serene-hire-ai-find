@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -15,9 +14,6 @@ const Index = () => {
         <div className="flex justify-between items-center">
           <div className="text-2xl font-bold text-gray-800">TalentFlow</div>
           <div className="space-x-4">
-            <Button variant="ghost" onClick={() => navigate("/login")}>
-              Sign In
-            </Button>
             <Button onClick={() => navigate("/signup")} className="bg-purple-600 hover:bg-purple-700">
               Get Started
             </Button>
@@ -39,15 +35,15 @@ const Index = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
           <Button 
             size="lg" 
-            onClick={() => navigate("/signup")}
+            onClick={() => navigate("/dashboard")}
             className="bg-purple-600 hover:bg-purple-700 text-lg px-8 py-6"
           >
-            Start Hiring Better
+            I'm a Recruiter
           </Button>
           <Button 
             variant="outline" 
             size="lg"
-            onClick={() => navigate("/candidate-signup")}
+            onClick={() => navigate("/candidate-dashboard")}
             className="text-lg px-8 py-6 border-purple-200 hover:bg-purple-50"
           >
             I'm a Candidate
